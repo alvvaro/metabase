@@ -52,10 +52,4 @@ const StaticQuestionInner = ({
   </SdkQuestionProvider>
 );
 
-/**
- * A component that renders a static question.
- *
- * @function
- * @category StaticQuestion
- */
 export const StaticQuestion = withPublicComponentWrapper(StaticQuestionInner);
