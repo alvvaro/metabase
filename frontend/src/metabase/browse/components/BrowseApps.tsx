@@ -35,9 +35,15 @@ const APPS = [
     createdAt: new Date(),
   },
   {
-    name: "Access Request Systems",
+    name: "Access Request",
     id: "access-request-systems",
     description: "A list of systems that require access requests",
+    createdAt: new Date(),
+  },
+  {
+    name: "Manage Access Requests",
+    id: "manage-access-requests",
+    description: "Approve or deny access requests",
     createdAt: new Date(),
   },
 ];
@@ -46,7 +52,7 @@ export const BrowseApps = () => {
   const dispatch = useDispatch();
 
   const handleOpenApp = (appId: string) => {
-    dispatch(push(`/app/${appId}`));
+    dispatch(push(`/apps/${appId}`));
   };
 
   return (

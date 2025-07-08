@@ -18,7 +18,7 @@ export function AccessRequestSystems() {
   return (
     <>
       <HeaderWithNavigation
-        title="Access Request Systems"
+        title="Access Request"
         navigationItems={[
           { label: "All Systems", href: "/access-request-systems" },
           { label: "New Request", href: "/access-request-systems/new" },
@@ -61,7 +61,7 @@ export function AccessRequestSystems() {
                     rightSection={
                       <Button
                         component={Link}
-                        to={`/app/access-request-systems/new?system=${system.id}`}
+                        to={`/apps/access-request-systems/new?system=${system.id}`}
                         variant="filled"
                       >
                         {"Request"}

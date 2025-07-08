@@ -47,7 +47,7 @@ export function HeaderWithNavigation({ title, navigationItems }: Props) {
               return (
                 <Anchor
                   component={Link}
-                  to={`/app${item.href}`}
+                  to={`/apps${item.href}`}
                   key={item.label}
                   tt="uppercase"
                   p="var(--mantine-spacing-xs) var(--mantine-spacing-md)"

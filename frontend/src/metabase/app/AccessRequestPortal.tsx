@@ -57,7 +57,7 @@ export function AccessRequestPortal() {
           rightSection={
             <Button
               component={Link}
-              to="/app/access-request-systems"
+              to="/apps/access-request-systems"
               leftSection={<IconPlus />}
               variant="filled"
             >

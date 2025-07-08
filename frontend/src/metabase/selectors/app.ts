@@ -27,7 +27,7 @@ export interface RouterProps {
 const PATHS_WITHOUT_NAVBAR = [
   /^\/setup/,
   /^\/auth/,
-  /^\/app\//,
+  /^\/apps\//,
   /\/model\/.*\/query/,
   /\/model\/.*\/metadata/,
   /\/model\/query/,

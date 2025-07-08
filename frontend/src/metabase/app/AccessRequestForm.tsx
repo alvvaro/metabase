@@ -23,7 +23,7 @@ export function AccessRequestForm() {
   return (
     <>
       <HeaderWithNavigation
-        title="Access Request Systems"
+        title="Access Request"
         navigationItems={[
           { label: "All Systems", href: "/access-request-systems" },
           { label: "New Request", href: "/access-request-systems/new" },
@@ -54,7 +54,7 @@ export function AccessRequestForm() {
               disabled
             />
             <Textarea
-              placeholder="Describe why do you need the access and for how long"
+              placeholder="Add account information, handle, etc. Describe why do you need the access and for how long"
               label="Additional Information (optional)"
               autosize
               minRows={4}
