@@ -5,6 +5,7 @@ import App from "metabase/App.tsx";
 import getAccountRoutes from "metabase/account/routes";
 import CollectionPermissionsModal from "metabase/admin/permissions/components/CollectionPermissionsModal/CollectionPermissionsModal";
 import getAdminRoutes from "metabase/admin/routes";
+import getAppRoutes from "metabase/app/routes";
 import { ForgotPassword } from "metabase/auth/components/ForgotPassword";
 import { Login } from "metabase/auth/components/Login";
 import { Logout } from "metabase/auth/components/Logout";
@@ -16,6 +17,7 @@ import {
   BrowseSchemas,
   BrowseTables,
 } from "metabase/browse";
+import { BrowseApps } from "metabase/browse/components/BrowseApps";
 import { ArchiveCollectionModal } from "metabase/collections/components/ArchiveCollectionModal";
 import CollectionLanding from "metabase/collections/components/CollectionLanding";
 import { MoveCollectionModal } from "metabase/collections/components/MoveCollectionModal";
@@ -299,6 +301,7 @@ export const getRoutes = (store) => {
               path="databases/:dbId/schema/:schemaName"
               component={BrowseTables}
             />
+            <Route path="apps" component={BrowseApps} />
 
             {/* These two Redirects support legacy paths in v48 and earlier */}
             <Redirect from=":dbId-:slug" to="databases/:dbId-:slug" />
@@ -311,6 +314,9 @@ export const getRoutes = (store) => {
           {/* INDIVIDUAL DASHBOARDS */}
 
           <Route path="/auto/dashboard/*" component={AutomaticDashboardApp} />
+
+          {/* APPS */}
+          {getAppRoutes()}
 
           {/* REFERENCE */}
           <Route path="/reference" title={t`Data Reference`}>
