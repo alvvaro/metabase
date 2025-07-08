@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-imports */
 import { Button, Container, Stack, TextInput } from "@mantine/core";
 import { IconKey, IconSearch } from "@tabler/icons-react";
+import { Link } from "react-router";
 
 import { Callout } from "./components/Callout";
 import { EmojiIcon } from "./components/EmojiIcon";
@@ -20,6 +21,7 @@ export function AccessRequestSystems() {
         title="Access Request Systems"
         navigationItems={[
           { label: "All Systems", href: "/access-request-systems" },
+          { label: "New Request", href: "/access-request-systems/new" },
           { label: "My Requests", href: "/access-request-portal" },
         ]}
       />
@@ -56,7 +58,15 @@ export function AccessRequestSystems() {
                     title={system.name}
                     description={system.description}
                     icon={<EmojiIcon fz={32} emoji={system.emoji} />}
-                    rightSection={<Button variant="filled">{"Request"}</Button>}
+                    rightSection={
+                      <Button
+                        component={Link}
+                        to={`/app/access-request-systems/new?system=${system.id}`}
+                        variant="filled"
+                      >
+                        {"Request"}
+                      </Button>
+                    }
                   />
                 );
               }}

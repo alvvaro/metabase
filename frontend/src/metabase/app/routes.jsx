@@ -2,6 +2,7 @@ import { t } from "ttag";
 
 import { Route } from "metabase/hoc/Title";
 
+import { AccessRequestForm } from "./AccessRequestForm";
 import { AccessRequestPortal } from "./AccessRequestPortal";
 import { AccessRequestSystems } from "./AccessRequestSystems";
 import { ComponentsLibrary } from "./ComponentsLibrary";
@@ -18,6 +19,11 @@ const getRoutes = () => {
         path="access-request-portal"
         title={t`Access Request Portal`}
         component={AccessRequestPortal}
+      />
+      <Route
+        path="access-request-systems/new"
+        title={t`Access Request Form`}
+        component={AccessRequestForm}
       />
       <Route
         path="access-request-systems"
