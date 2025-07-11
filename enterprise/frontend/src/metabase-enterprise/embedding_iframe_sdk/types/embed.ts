@@ -94,6 +94,9 @@ export interface ContentManagerCommonEmbedOptions {
   /** Which entities to show on the question's data picker */
   dataPickerEntityTypes?: EmbeddingEntityType[];
 
+  /** Whether to show the "New Exploration" button. Defaults to true. */
+  withNewQuestion?: boolean;
+
   questionId?: never;
   dashboardId?: never;
 }
@@ -101,6 +104,9 @@ export interface ContentManagerCommonEmbedOptions {
 export interface CurateContentEmbedOptions
   extends ContentManagerCommonEmbedOptions {
   template: "curate-content";
+
+  /** Whether to show the "New Dashboard" button. Defaults to true. */
+  withNewDashboard?: boolean;
 }
 
 export interface ViewContentEmbedOptions

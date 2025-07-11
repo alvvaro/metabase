@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { P, match } from "ts-pattern";
-import { t } from "ttag";
+import { c, t } from "ttag";
 
 import {
   CollectionBrowser,
@@ -10,7 +10,7 @@ import {
   InteractiveQuestion,
   type SdkCollectionId,
 } from "embedding-sdk";
-import { ActionIcon, Button, Group, Icon, Stack } from "metabase/ui";
+import { Anchor, Button, Group, Stack, Text } from "metabase/ui";
 
 import type { SdkIframeEmbedSettings } from "../types/embed";
 
@@ -20,40 +20,48 @@ interface ViewContentProps {
   };
 }
 
-type CurrentView =
+type ContentManagerView =
   | { type: "dashboard"; id: number | string }
   | { type: "question"; id: number | string }
   | { type: "exploration" }
   | { type: "create-dashboard" }
-  | { type: "edit-dashboard"; id: number | string }
-  | null;
+  | { type: "collection-browser" };
 
 export function ContentManager({ settings }: ViewContentProps) {
   const isReadOnly = settings.template === "view-content";
 
-  const [currentView, setCurrentView] = useState<CurrentView>(null);
+  const [currentView, setCurrentView] = useState<ContentManagerView>({
+    type: "collection-browser",
+  });
 
   // Track the collection that the user is currently viewing.
   // Used for specifying the target collection for new questions.
-  const [currentCollection, setCurrentCollection] = useState<SdkCollectionId>(
-    settings.initialCollection,
-  );
+  const [currentCollection, setCurrentCollection] = useState<{
+    id: SdkCollectionId;
+    name?: string;
+  }>({ id: settings.initialCollection });
 
-  const GoBack = ({ view = null }: { view?: CurrentView }) => (
-    <ActionIcon
-      variant="outline"
-      radius="xl"
-      size="2.625rem"
-      color="border"
-      onClick={() => setCurrentView(view)}
-    >
-      <Icon c="brand" name="arrow_left" />
-    </ActionIcon>
-  );
+  const GoBackToView = ({ view }: { view: ContentManagerView }) => {
+    const backToMessage = match(view.type)
+      .with("collection-browser", () => currentCollection.name ?? t`Collection`)
+      .with("dashboard", () => t`Dashboard`)
+      .otherwise(() => null);
+
+    if (backToMessage === null) {
+      return null;
+    }
+
+    return (
+      <Text ff="var(--mb-default-font-family)" fw="600">
+        {c("{0} is the link to return to the last visited resource")
+          .jt`Return to ${(<Anchor onClick={() => setCurrentView(view)}>{backToMessage}</Anchor>)}`}
+      </Text>
+    );
+  };
 
   const NavBar = () => (
     <Stack pt="md" px="lg">
-      <GoBack />
+      <GoBackToView view={{ type: "collection-browser" }} />
     </Stack>
   );
 
@@ -68,6 +76,7 @@ export function ContentManager({ settings }: ViewContentProps) {
           withDownloads
           isSaveEnabled={!isReadOnly}
           entityTypes={settings.dataPickerEntityTypes}
+          targetCollection={currentCollection.id}
         />
       </Stack>
     ))
@@ -75,43 +84,22 @@ export function ContentManager({ settings }: ViewContentProps) {
       <Stack h="100%">
         <CreateDashboardModal
           onCreate={(dashboard) =>
-            setCurrentView({ type: "edit-dashboard", id: dashboard.id })
+            setCurrentView({ type: "dashboard", id: dashboard.id })
           }
-          onClose={() => setCurrentView(null)}
+          onClose={() => setCurrentView({ type: "collection-browser" })}
+          initialCollectionId={currentCollection.id}
         />
-      </Stack>
-    ))
-    .with({ type: "edit-dashboard" }, ({ id }) => (
-      <Stack h="100%">
-        <Group pt="md" px="lg" justify="space-between">
-          <GoBack view={{ type: "dashboard", id }} />
-
-          {/* <Button
-            onClick={() => setCurrentView({ type: "edit-dashboard", id })}
-            disabled
-          >
-            {t`Edit`}
-          </Button> */}
-        </Group>
-
-        <EditableDashboard withCardTitle dashboardId={id} />
       </Stack>
     ))
     .with({ type: "dashboard", id: P.nonNullable }, ({ id }) => (
       <Stack h="100%">
-        <Group pt="md" px="lg" justify="space-between">
-          <GoBack />
+        <NavBar />
 
-          {!isReadOnly && (
-            <Button
-              onClick={() => setCurrentView({ type: "edit-dashboard", id })}
-            >
-              {t`Edit`}
-            </Button>
-          )}
-        </Group>
-
-        <InteractiveDashboard dashboardId={id} withDownloads />
+        {isReadOnly ? (
+          <InteractiveDashboard dashboardId={id} withDownloads />
+        ) : (
+          <EditableDashboard withCardTitle dashboardId={id} />
+        )}
       </Stack>
     ))
     .with({ type: "question", id: P.nonNullable }, ({ id }) => (
@@ -123,21 +111,23 @@ export function ContentManager({ settings }: ViewContentProps) {
           height="100%"
           withDownloads
           isSaveEnabled={!isReadOnly}
-          targetCollection={currentCollection}
+          targetCollection={currentCollection.id}
         />
       </Stack>
     ))
     .otherwise(() => (
       <Stack px="lg" py="xl" maw="60rem" mx="auto">
         <Group justify="flex-end" align="center" gap="sm">
-          <Button
-            justify="center"
-            onClick={() => setCurrentView({ type: "exploration" })}
-          >
-            {t`New Exploration`}
-          </Button>
+          {(settings.withNewQuestion ?? true) && (
+            <Button
+              justify="center"
+              onClick={() => setCurrentView({ type: "exploration" })}
+            >
+              {t`New Exploration`}
+            </Button>
+          )}
 
-          {!isReadOnly && (
+          {!isReadOnly && (settings.withNewDashboard ?? true) && (
             <Button
               justify="center"
               onClick={() => setCurrentView({ type: "create-dashboard" })}
@@ -165,8 +155,8 @@ export function ContentManager({ settings }: ViewContentProps) {
               .with({ model: "card" }, ({ id }) =>
                 setCurrentView({ type: "question", id }),
               )
-              .with({ model: "collection" }, ({ id }) =>
-                setCurrentCollection(id),
+              .with({ model: "collection" }, (item) =>
+                setCurrentCollection({ id: item.id, name: item.name }),
               )
               .otherwise(() => {})
           }
