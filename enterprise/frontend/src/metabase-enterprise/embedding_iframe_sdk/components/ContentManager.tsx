@@ -149,6 +149,7 @@ export function ContentManager({ settings }: ViewContentProps) {
 
         <CollectionBrowser
           collectionId={settings.initialCollection}
+          visibleColumns={settings.collectionVisibleColumns}
           visibleEntityTypes={
             settings.collectionEntityTypes ?? [
               "dashboard",

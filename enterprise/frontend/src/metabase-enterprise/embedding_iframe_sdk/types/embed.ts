@@ -1,4 +1,5 @@
 import type {
+  CollectionBrowserListColumns,
   EmbeddingEntityType,
   EntityTypeFilterKeys,
   MetabaseTheme,
@@ -84,7 +85,13 @@ export interface ExplorationEmbedOptions {
 export interface ContentManagerCommonEmbedOptions {
   initialCollection: CollectionId;
 
+  /** Which collections to show on the collection browser */
+  collectionVisibleColumns?: CollectionBrowserListColumns[];
+
+  /** Which entities to show on the collection browser */
   collectionEntityTypes?: CollectionBrowserEntityTypes[];
+
+  /** Which entities to show on the question's data picker */
   dataPickerEntityTypes?: EmbeddingEntityType[];
 
   questionId?: never;
