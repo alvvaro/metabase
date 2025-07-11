@@ -147,6 +147,7 @@ export function ContentManager({ settings }: ViewContentProps) {
               "collection",
             ]
           }
+          pageSize={settings.collectionPageSize}
           onClick={(item) =>
             match(item)
               .with({ model: "dashboard" }, ({ id }) =>

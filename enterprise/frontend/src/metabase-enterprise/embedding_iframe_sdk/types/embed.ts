@@ -88,6 +88,9 @@ export interface ContentManagerCommonEmbedOptions {
   /** Which collections to show on the collection browser */
   collectionVisibleColumns?: CollectionBrowserListColumns[];
 
+  /** How many items to show per page in the collection browser */
+  collectionPageSize?: number;
+
   /** Which entities to show on the collection browser */
   collectionEntityTypes?: CollectionBrowserEntityTypes[];
 
