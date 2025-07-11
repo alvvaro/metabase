@@ -140,13 +140,7 @@ export function ContentManager({ settings }: ViewContentProps) {
         <CollectionBrowser
           collectionId={settings.initialCollection}
           visibleColumns={settings.collectionVisibleColumns}
-          visibleEntityTypes={
-            settings.collectionEntityTypes ?? [
-              "dashboard",
-              "question",
-              "collection",
-            ]
-          }
+          visibleEntityTypes={settings.collectionEntityTypes}
           pageSize={settings.collectionPageSize}
           onClick={(item) =>
             match(item)
@@ -156,6 +150,9 @@ export function ContentManager({ settings }: ViewContentProps) {
               .with({ model: "card" }, ({ id }) =>
                 setCurrentView({ type: "question", id }),
               )
+              .with({ model: "dataset" }, ({ id }) => {
+                setCurrentView({ type: "question", id });
+              })
               .with({ model: "collection" }, (item) =>
                 setCurrentCollection({ id: item.id, name: item.name }),
               )
