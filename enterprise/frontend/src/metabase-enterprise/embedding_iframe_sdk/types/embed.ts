@@ -1,4 +1,5 @@
 import type {
+  EmbeddingEntityType,
   EntityTypeFilterKeys,
   MetabaseTheme,
   SqlParameterValues,
@@ -79,24 +80,25 @@ export interface ExplorationEmbedOptions {
   dashboardId?: never;
 }
 
-export interface CurateContentEmbedOptions {
-  template: "curate-content";
+/** Shared properties between the content manager templates. */
+export interface ContentManagerCommonEmbedOptions {
   initialCollection: CollectionId;
 
-  entityTypes?: CollectionBrowserEntityTypes[];
+  collectionEntityTypes?: CollectionBrowserEntityTypes[];
+  dataPickerEntityTypes?: EmbeddingEntityType[];
 
   questionId?: never;
   dashboardId?: never;
 }
 
-export interface ViewContentEmbedOptions {
+export interface CurateContentEmbedOptions
+  extends ContentManagerCommonEmbedOptions {
+  template: "curate-content";
+}
+
+export interface ViewContentEmbedOptions
+  extends ContentManagerCommonEmbedOptions {
   template: "view-content";
-  initialCollection: CollectionId;
-
-  entityTypes?: CollectionBrowserEntityTypes[];
-
-  questionId?: never;
-  dashboardId?: never;
 }
 
 type CollectionBrowserEntityTypes =

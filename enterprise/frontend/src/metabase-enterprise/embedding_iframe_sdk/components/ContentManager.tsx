@@ -60,6 +60,7 @@ export function ContentManager({ settings }: ViewContentProps) {
           height="100%"
           withDownloads
           isSaveEnabled={!isReadOnly}
+          entityTypes={settings.dataPickerEntityTypes}
         />
       </Stack>
     ))
@@ -141,7 +142,11 @@ export function ContentManager({ settings }: ViewContentProps) {
         <CollectionBrowser
           collectionId={settings.initialCollection}
           visibleEntityTypes={
-            settings.entityTypes ?? ["dashboard", "question", "collection"]
+            settings.collectionEntityTypes ?? [
+              "dashboard",
+              "question",
+              "collection",
+            ]
           }
           onClick={(item) =>
             match(item)
