@@ -8,6 +8,7 @@ import {
   EditableDashboard,
   InteractiveDashboard,
   InteractiveQuestion,
+  type SdkCollectionId,
 } from "embedding-sdk";
 import { ActionIcon, Button, Group, Icon, Stack } from "metabase/ui";
 
@@ -31,6 +32,12 @@ export function ContentManager({ settings }: ViewContentProps) {
   const isReadOnly = settings.template === "view-content";
 
   const [currentView, setCurrentView] = useState<CurrentView>(null);
+
+  // Track the collection that the user is currently viewing.
+  // Used for specifying the target collection for new questions.
+  const [currentCollection, setCurrentCollection] = useState<SdkCollectionId>(
+    settings.initialCollection,
+  );
 
   const GoBack = ({ view = null }: { view?: CurrentView }) => (
     <ActionIcon
@@ -116,6 +123,7 @@ export function ContentManager({ settings }: ViewContentProps) {
           height="100%"
           withDownloads
           isSaveEnabled={!isReadOnly}
+          targetCollection={currentCollection}
         />
       </Stack>
     ))
@@ -155,6 +163,9 @@ export function ContentManager({ settings }: ViewContentProps) {
               )
               .with({ model: "card" }, ({ id }) =>
                 setCurrentView({ type: "question", id }),
+              )
+              .with({ model: "collection" }, ({ id }) =>
+                setCurrentCollection(id),
               )
               .otherwise(() => {})
           }
