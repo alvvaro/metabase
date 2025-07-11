@@ -232,14 +232,10 @@ export const MetabotChat = () => {
               data-testid="metabot-chat-input"
               w="100%"
               leftSection={
-                <Box
-                  h="100%"
-                  pt="11px"
-                  onDoubleClick={() => metabot.toggleStreaming()}
-                >
+                <Box h="100%" pt="11px" onDoubleClick={metabot.toggleStreaming}>
                   <Icon
                     name="metabot"
-                    c={metabot.useStreaming ? "warning" : "brand"}
+                    c={metabot.useStreaming ? "brand" : "warning"}
                   />
                 </Box>
               }
@@ -256,6 +252,9 @@ export const MetabotChat = () => {
               placeholder={t`Tell me to do something, or ask a question`}
               onChange={(e) => metabot.setPrompt(e.target.value)}
               onKeyDown={(e) => {
+                if (e.nativeEvent.isComposing) {
+                  return;
+                }
                 const isModifiedKeyPress =
                   e.shiftKey || e.ctrlKey || e.metaKey || e.altKey;
                 if (e.key === "Enter" && !isModifiedKeyPress) {
