@@ -6,6 +6,7 @@ import {
   questionIdArgType,
   questionIds,
 } from "embedding-sdk/test/storybook-id-args";
+import { Box } from "metabase/ui";
 
 import { StaticQuestion } from "./StaticQuestion";
 
@@ -26,7 +27,11 @@ export default {
 };
 
 const Template: StoryFn<StaticQuestionComponentProps> = (args) => {
-  return <StaticQuestion {...args} />;
+  return (
+    <Box p="md">
+      <StaticQuestion {...args} />
+    </Box>
+  );
 };
 
 export const Default = {
