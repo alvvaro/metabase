@@ -135,6 +135,7 @@ const InteractiveQuestion = withPublicComponentWrapper(
   _InteractiveQuestion,
 ) as typeof _InteractiveQuestion & {
   BackButton: typeof BackButton;
+  Breadcrumbs: typeof SdkBreadcrumbs;
   Filter: typeof Filter;
   FilterDropdown: typeof FilterDropdown;
   ResetButton: typeof QuestionResetButton;
@@ -162,6 +163,7 @@ const InteractiveQuestion = withPublicComponentWrapper(
 };
 
 InteractiveQuestion.BackButton = BackButton;
+InteractiveQuestion.Breadcrumbs = SdkBreadcrumbs;
 InteractiveQuestion.Filter = Filter;
 InteractiveQuestion.FilterDropdown = FilterDropdown;
 InteractiveQuestion.ResetButton = QuestionResetButton;
