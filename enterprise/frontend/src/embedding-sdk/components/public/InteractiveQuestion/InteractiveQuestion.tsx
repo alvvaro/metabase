@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useEffect } from "react";
 
 import {
   BackButton,
@@ -32,6 +33,8 @@ import {
   type InteractiveQuestionDefaultViewProps,
 } from "embedding-sdk/components/private/InteractiveQuestionDefaultView";
 import { withPublicComponentWrapper } from "embedding-sdk/components/private/PublicComponentWrapper";
+import { useBreadcrumbContext } from "embedding-sdk/hooks/use-breadcrumb-context";
+import { useInteractiveQuestionContext } from "embedding-sdk/components/private/InteractiveQuestion/context";
 import type { InteractiveQuestionQuestionIdProps } from "embedding-sdk/components/public/InteractiveQuestion/types";
 
 /**
@@ -77,6 +80,34 @@ export type DrillThroughQuestionProps = Omit<
  */
 export type InteractiveQuestionProps = BaseInteractiveQuestionProps &
   InteractiveQuestionDefaultViewProps;
+
+const InteractiveQuestionWithBreadcrumb = ({ 
+  children,
+  ...props 
+}: { 
+  children: ReactNode;
+} & InteractiveQuestionDefaultViewProps) => {
+  const { question } = useInteractiveQuestionContext();
+  const { updateCurrentLocation } = useBreadcrumbContext();
+
+  useEffect(() => {
+    if (question) {
+      updateCurrentLocation({
+        id: `question-${question.id()}`,
+        name: question.displayName() || 'Question',
+        type: 'question',
+      });
+    }
+  }, [question, updateCurrentLocation]);
+
+  return (
+    <>
+      {children ?? (
+        <InteractiveQuestionDefaultView {...props} />
+      )}
+    </>
+  );
+};
 
 export const _InteractiveQuestion = ({
   questionId,

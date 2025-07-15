@@ -9,7 +9,6 @@ import {
   SdkError,
   SdkLoader,
 } from "embedding-sdk/components/private/PublicComponentWrapper";
-import { useBreadcrumbContext } from "embedding-sdk/hooks/use-breadcrumb-context";
 import { useTranslatedCollectionId } from "embedding-sdk/hooks/private/use-translated-collection-id";
 import { shouldRunCardQuery } from "embedding-sdk/lib/interactive-question";
 import type { SdkQuestionTitleProps } from "embedding-sdk/types/question";
@@ -71,19 +70,6 @@ export const InteractiveQuestionDefaultView = ({
     isSaveEnabled,
     withDownloads,
   } = useInteractiveQuestionContext();
-
-  const { updateCurrentLocation } = useBreadcrumbContext();
-
-  // Update breadcrumb when question changes
-  useEffect(() => {
-    if (question) {
-      updateCurrentLocation({
-        id: `question-${question.id()}`,
-        name: question.displayName() || 'Question',
-        type: 'question',
-      });
-    }
-  }, [question, updateCurrentLocation]);
 
   const isNewQuestion = originalId === "new";
   const isQuestionSaved = question?.isSaved();
