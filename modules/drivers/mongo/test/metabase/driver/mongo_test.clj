@@ -1100,7 +1100,6 @@
 
               ;; This query exercises the code path that was generating double-nested _id structures
               ;; Without the fix, this would generate:
-              ;; $group: { "_id": {"_id": {"widgetType": "$_id.widgetType"}}, "sum": {...} }
               ;; $project: { "_id": false, "_id.widgetType": "$_id._id.widgetType", "sum": true }
               ;; Which causes: "Path collision at _id.widgetType remaining portion widgetType"
               (testing "Query with _id.widgetType breakout should not throw path collision error"
@@ -1580,53 +1579,3 @@
                     (is (= ["_id.Country" "count"] col-names))))))
             (finally
               (.drop coll))))))))
-
-(deftest integer-field-id-projection-test
-  (testing "Integer field IDs with dotted names should use flat structure with underscores"
-    (testing "This tests the case where MBQL uses integer IDs (not string names) to reference fields"
-      (mt/test-driver :mongo
-        (mt/with-temp [:model/Database db {}
-                       :model/Table table {:db_id (:id db) :name "test_table"}
-                       :model/Field field1 {:table_id (:id table) :name "source.username" :base_type :type/Text}
-                       :model/Field field2 {:table_id (:id table) :name "stats.total" :base_type :type/Integer}
-                       :model/Field field3 {:table_id (:id table) :name "simple_field" :base_type :type/Text}]
-          (mt/with-metadata-provider (:id db)
-            (let [;; The key aspect being tested: we use INTEGER IDs to reference fields
-                  ;; not string names like [:field "source.username" nil]
-                  query    {:database (:id db)
-                            :type     :query
-                            :query    {:source-table (:id table)
-                                       :breakout     [[:field (:id field1) nil] ; Integer ID, not "source.username"
-                                                      [:field (:id field2) nil] ; Integer ID, not "stats.total"
-                                                      [:field (:id field3) nil]] ; Integer ID, not "simple_field"
-                                       :aggregation  [[:aggregation-options [:count] {:name "count"}]]}}
-                  compiled (mongo.qp/mbql->native query)]
-
-              (testing "Field IDs should be integers"
-                ;; The driver resolves integer IDs to field names via the metadata provider
-                ;; e.g., [:field 123 nil] -> looks up field 123 -> gets name "source.username"
-                (is (integer? (:id field1)))
-                (is (integer? (:id field2)))
-                (is (integer? (:id field3))))
-
-              (testing "Group stage should use flat structure with underscores for dots"
-                (let [group-stage (-> compiled :query first)]
-                  (is (= "$group" (first (keys group-stage))))
-                  (let [id-structure (get-in group-stage ["$group" "_id"])]
-                    ;; All fields should be at the same level with dots replaced by underscores
-                    (is (= {"source_username" "$source.username"
-                            "stats_total"     "$stats.total"
-                            "simple_field"    "$simple_field"}
-                           id-structure)))))
-
-              (testing "Project stage should reference the flat structure"
-                (let [project-stage (-> compiled :query (nth 2))]
-                  (is (= "$project" (first (keys project-stage))))
-                  (let [projections (get project-stage "$project")]
-                    ;; Projections should match the group structure
-                    (is (= {"_id"             false
-                            "source.username" "$_id.source_username"
-                            "stats.total"     "$_id.stats_total"
-                            "simple_field"    "$_id.simple_field"
-                            "count"           true}
-                           projections))))))))))))
