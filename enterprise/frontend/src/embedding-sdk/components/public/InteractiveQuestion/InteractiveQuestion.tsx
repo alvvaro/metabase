@@ -28,14 +28,15 @@ import {
   InteractiveQuestionProvider,
   type InteractiveQuestionProviderProps,
 } from "embedding-sdk/components/private/InteractiveQuestion/context";
+import { useInteractiveQuestionContext } from "embedding-sdk/components/private/InteractiveQuestion/context";
 import {
   InteractiveQuestionDefaultView,
   type InteractiveQuestionDefaultViewProps,
 } from "embedding-sdk/components/private/InteractiveQuestionDefaultView";
 import { withPublicComponentWrapper } from "embedding-sdk/components/private/PublicComponentWrapper";
-import { useBreadcrumbContext } from "embedding-sdk/hooks/use-breadcrumb-context";
-import { useInteractiveQuestionContext } from "embedding-sdk/components/private/InteractiveQuestion/context";
+import { SdkBreadcrumbs } from "embedding-sdk/components/private/SdkBreadcrumbs";
 import type { InteractiveQuestionQuestionIdProps } from "embedding-sdk/components/public/InteractiveQuestion/types";
+import { useBreadcrumbContext } from "embedding-sdk/hooks/use-breadcrumb-context";
 
 /**
  * @interface
@@ -81,10 +82,10 @@ export type DrillThroughQuestionProps = Omit<
 export type InteractiveQuestionProps = BaseInteractiveQuestionProps &
   InteractiveQuestionDefaultViewProps;
 
-const InteractiveQuestionWithBreadcrumb = ({ 
+export const InteractiveQuestionWithBreadcrumb = ({
   children,
-  ...props 
-}: { 
+  ...props
+}: {
   children: ReactNode;
 } & InteractiveQuestionDefaultViewProps) => {
   const { question } = useInteractiveQuestionContext();
@@ -94,19 +95,13 @@ const InteractiveQuestionWithBreadcrumb = ({
     if (question) {
       updateCurrentLocation({
         id: `question-${question.id()}`,
-        name: question.displayName() || 'Question',
-        type: 'question',
+        name: question.displayName() || "Question",
+        type: "question",
       });
     }
   }, [question, updateCurrentLocation]);
 
-  return (
-    <>
-      {children ?? (
-        <InteractiveQuestionDefaultView {...props} />
-      )}
-    </>
-  );
+  return <>{children ?? <InteractiveQuestionDefaultView {...props} />}</>;
 };
 
 export const _InteractiveQuestion = ({
