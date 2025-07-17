@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo } from "react";
 
 import { StaticQuestionSdkMode } from "embedding-sdk/components/public/StaticQuestion/mode";
+import { useBreadcrumbContext } from "embedding-sdk/hooks/private/use-breadcrumb-context";
 import { useLoadQuestion } from "embedding-sdk/hooks/private/use-load-question";
 import { transformSdkQuestion } from "embedding-sdk/lib/transform-question";
 import { useSdkDispatch, useSdkSelector } from "embedding-sdk/store";
@@ -120,6 +121,8 @@ export const InteractiveQuestionProvider = ({
     );
   }, [question, variant, plugins]);
 
+  const { updateCurrentLocation } = useBreadcrumbContext();
+
   const questionContext: InteractiveQuestionContextType = {
     originalId: questionId,
     isQuestionLoading,
@@ -154,6 +157,16 @@ export const InteractiveQuestionProvider = ({
   useEffect(() => {
     dispatch(setEntityTypes(entityTypes));
   }, [dispatch, entityTypes]);
+
+  useEffect(() => {
+    if (question) {
+      updateCurrentLocation({
+        id: `question-${question.id()}`,
+        name: question.displayName() || "Question",
+        type: "question",
+      });
+    }
+  }, [question, updateCurrentLocation]);
 
   return (
     <InteractiveQuestionContext.Provider value={questionContext}>

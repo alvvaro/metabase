@@ -13,7 +13,7 @@ import {
   SdkLoader,
   withPublicComponentWrapper,
 } from "embedding-sdk/components/private/PublicComponentWrapper";
-import { useBreadcrumbContext } from "embedding-sdk/hooks/use-breadcrumb-context";
+import { useBreadcrumbContext } from "embedding-sdk/hooks/private/use-breadcrumb-context";
 import {
   type SdkDashboardDisplayProps,
   useSdkDashboardParams,
@@ -21,11 +21,11 @@ import {
 import { useSdkDispatch, useSdkSelector } from "embedding-sdk/store";
 import type { DashboardEventHandlersProps } from "embedding-sdk/types/dashboard";
 import type { MetabasePluginsConfig } from "embedding-sdk/types/plugins";
+import { useGetDashboardQuery } from "metabase/api";
 import { useLocale } from "metabase/common/hooks/use-locale";
 import { setEditingDashboard, toggleSidebar } from "metabase/dashboard/actions";
 import { Dashboard } from "metabase/dashboard/components/Dashboard/Dashboard";
 import { SIDEBAR_NAME } from "metabase/dashboard/constants";
-import { useGetDashboardQuery } from "metabase/api";
 import {
   type DashboardContextProps,
   DashboardContextProvider,
@@ -128,11 +128,11 @@ const SdkDashboardInner = ({
       updateCurrentLocation({
         id: `dashboard-${dashboard.id}`,
         name: dashboard.name,
-        type: 'dashboard',
+        type: "dashboard",
       });
     }
   }, [dashboard, updateCurrentLocation]);
-  
+
   const { displayOptions } = useSdkDashboardParams({
     dashboardId,
     withDownloads,

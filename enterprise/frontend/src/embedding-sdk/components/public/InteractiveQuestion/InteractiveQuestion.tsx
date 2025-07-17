@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { useEffect } from "react";
 
 import {
   BackButton,
@@ -28,15 +27,12 @@ import {
   InteractiveQuestionProvider,
   type InteractiveQuestionProviderProps,
 } from "embedding-sdk/components/private/InteractiveQuestion/context";
-import { useInteractiveQuestionContext } from "embedding-sdk/components/private/InteractiveQuestion/context";
 import {
   InteractiveQuestionDefaultView,
   type InteractiveQuestionDefaultViewProps,
 } from "embedding-sdk/components/private/InteractiveQuestionDefaultView";
 import { withPublicComponentWrapper } from "embedding-sdk/components/private/PublicComponentWrapper";
-import { SdkBreadcrumbs } from "embedding-sdk/components/private/SdkBreadcrumbs";
 import type { InteractiveQuestionQuestionIdProps } from "embedding-sdk/components/public/InteractiveQuestion/types";
-import { useBreadcrumbContext } from "embedding-sdk/hooks/use-breadcrumb-context";
 
 /**
  * @interface
@@ -81,28 +77,6 @@ export type DrillThroughQuestionProps = Omit<
  */
 export type InteractiveQuestionProps = BaseInteractiveQuestionProps &
   InteractiveQuestionDefaultViewProps;
-
-export const InteractiveQuestionWithBreadcrumb = ({
-  children,
-  ...props
-}: {
-  children: ReactNode;
-} & InteractiveQuestionDefaultViewProps) => {
-  const { question } = useInteractiveQuestionContext();
-  const { updateCurrentLocation } = useBreadcrumbContext();
-
-  useEffect(() => {
-    if (question) {
-      updateCurrentLocation({
-        id: `question-${question.id()}`,
-        name: question.displayName() || "Question",
-        type: "question",
-      });
-    }
-  }, [question, updateCurrentLocation]);
-
-  return <>{children ?? <InteractiveQuestionDefaultView {...props} />}</>;
-};
 
 export const _InteractiveQuestion = ({
   questionId,
@@ -161,7 +135,6 @@ const InteractiveQuestion = withPublicComponentWrapper(
   _InteractiveQuestion,
 ) as typeof _InteractiveQuestion & {
   BackButton: typeof BackButton;
-  Breadcrumbs: typeof SdkBreadcrumbs;
   Filter: typeof Filter;
   FilterDropdown: typeof FilterDropdown;
   ResetButton: typeof QuestionResetButton;
@@ -189,7 +162,6 @@ const InteractiveQuestion = withPublicComponentWrapper(
 };
 
 InteractiveQuestion.BackButton = BackButton;
-InteractiveQuestion.Breadcrumbs = SdkBreadcrumbs;
 InteractiveQuestion.Filter = Filter;
 InteractiveQuestion.FilterDropdown = FilterDropdown;
 InteractiveQuestion.ResetButton = QuestionResetButton;
