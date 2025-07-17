@@ -3,8 +3,7 @@ import { useMemo } from "react";
 import * as Urls from "metabase/lib/urls";
 import { deserializeCard, parseHash } from "metabase/query_builder/actions";
 
-import type { BaseInteractiveQuestionProps } from "../public/InteractiveQuestion/InteractiveQuestion";
-
+import type { BaseInteractiveQuestionProps } from "../../public/SdkQuestion/SdkQuestion";
 import {
   type QuestionMockLocationParameters,
   SdkQuestionProvider,

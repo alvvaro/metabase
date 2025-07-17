@@ -109,7 +109,7 @@ export type InteractiveQuestionComponents = {
   DownloadWidgetDropdown: typeof DownloadWidgetDropdown;
 };
 
-export const _InteractiveQuestion = ({
+export const _SdkQuestion = ({
   questionId,
   withResetButton = true,
   title,
@@ -156,8 +156,8 @@ export const _InteractiveQuestion = ({
 );
 
 const SdkQuestion = withPublicComponentWrapper(
-  _InteractiveQuestion,
-) as typeof _InteractiveQuestion & InteractiveQuestionComponents;
+  _SdkQuestion,
+) as typeof _SdkQuestion & InteractiveQuestionComponents;
 
 SdkQuestion.BackButton = BackButton;
 SdkQuestion.Filter = Filter;
