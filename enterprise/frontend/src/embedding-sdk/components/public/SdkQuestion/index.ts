@@ -7,7 +7,7 @@ export {
   type DownloadWidgetDropdownProps,
   type EditorProps,
   type EditorButtonProps,
-  type FilterProps as InteractiveQuestionFilterProps,
+  type FilterProps,
   type FilterDropdownProps as InteractiveQuestionFilterDropdownProps,
   type QuestionSettingsProps as InteractiveQuestionQuestionSettingsProps,
   type QuestionSettingsDropdownProps as InteractiveQuestionQuestionSettingsDropdownProps,
