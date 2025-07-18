@@ -42,7 +42,7 @@ export {
   type QuestionVisualizationProps,
   type ResetButtonProps,
   type SaveButtonProps,
-  type InteractiveQuestionSaveQuestionFormProps,
+  type SaveQuestionFormProps,
   type InteractiveQuestionSummarizeDropdownProps,
   type InteractiveQuestionTitleProps,
   type DrillThroughQuestionProps,

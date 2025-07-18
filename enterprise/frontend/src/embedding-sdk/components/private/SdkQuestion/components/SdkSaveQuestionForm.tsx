@@ -25,7 +25,7 @@ export type SaveQuestionFormProps = {
  *
  * - For existing questions: Calls {@link SdkQuestionProps.onSave}
  * - Both callbacks receive the updated question object
- * - Form can be cancelled via the {@link InteractiveQuestionSaveQuestionFormProps.onCancel}
+ * - Form can be cancelled via the {@link SaveQuestionFormProps.onCancel}
  *
  * @function
  * @category InteractiveQuestion
