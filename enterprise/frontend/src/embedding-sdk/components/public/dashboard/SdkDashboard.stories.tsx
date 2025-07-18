@@ -1,8 +1,4 @@
-import {
-  MetabaseProvider,
-  SdkQuestion,
-  defineMetabaseTheme,
-} from "embedding-sdk";
+import { MetabaseProvider, defineMetabaseTheme } from "embedding-sdk";
 import { storybookSdkAuthDefaultConfig } from "embedding-sdk/test/CommonSdkStoryWrapper";
 import {
   dashboardIdArgType,
@@ -19,6 +15,8 @@ import {
   Stack,
   Title,
 } from "metabase/ui";
+
+import { SdkQuestion } from "../question";
 
 import { SdkDashboard, type SdkDashboardProps } from "./SdkDashboard";
 

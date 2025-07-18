@@ -4,7 +4,7 @@ import { SdkQuestion, type SdkQuestionProps } from "../SdkQuestion";
 
 type InteractiveQuestionProps = SdkQuestionProps & {
   // TODO: Let's just use plugins in SdkQuestionProps
-  plugins: SdkQuestionProps["componentPlugins"];
+  plugins?: SdkQuestionProps["componentPlugins"];
 };
 
 const _InteractiveQuestion = ({
