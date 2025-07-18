@@ -1,6 +1,6 @@
 export {
   type BackButtonProps,
-  type InteractiveQuestionBreakoutDropdownProps,
+  type BreakoutDropdownProps,
   type ChartTypeDropdownProps as InteractiveQuestionChartTypeDropdownProps,
   type ChartTypeSelectorProps as InteractiveQuestionChartTypeSelectorProps,
   type DownloadWidgetProps as InteractiveQuestionDownloadWidgetProps,
