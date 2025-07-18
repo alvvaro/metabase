@@ -78,7 +78,7 @@ export type DrillThroughQuestionProps = Omit<
 export type SdkQuestionProps = BaseSdkQuestionProps &
   SdkQuestionDefaultViewProps;
 
-export const _InteractiveQuestion = ({
+export const _SdkQuestion = ({
   questionId,
   withResetButton = true,
   title,
@@ -132,8 +132,8 @@ export const _InteractiveQuestion = ({
  * @param props
  */
 const SdkQuestion = withPublicComponentWrapper(
-  _InteractiveQuestion,
-) as typeof _InteractiveQuestion & {
+  _SdkQuestion,
+) as typeof _SdkQuestion & {
   BackButton: typeof BackButton;
   Filter: typeof Filter;
   FilterDropdown: typeof FilterDropdown;
