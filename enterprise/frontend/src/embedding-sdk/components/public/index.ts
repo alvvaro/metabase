@@ -43,7 +43,7 @@ export {
   type ResetButtonProps,
   type SaveButtonProps,
   type SaveQuestionFormProps,
-  type InteractiveQuestionSummarizeDropdownProps,
+  type SummarizeDropdownProps,
   type InteractiveQuestionTitleProps,
   type DrillThroughQuestionProps,
 } from "./SdkQuestion";
