@@ -46,6 +46,7 @@ const _InteractiveQuestion = ({
     initialSqlParameters={initialSqlParameters}
     onRun={onRun}
     mode={EmbeddingSdkMode}
+    enableNavigationToNewCard={true}
   >
     {children}
   </SdkQuestion>

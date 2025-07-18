@@ -37,6 +37,7 @@ const StaticQuestionInner = ({
     questionId={questionId}
     initialSqlParameters={initialSqlParameters}
     withDownloads={withDownloads}
+    enableNavigationToNewCard={false}
     mode={StaticQuestionSdkMode}
   >
     {children ?? (

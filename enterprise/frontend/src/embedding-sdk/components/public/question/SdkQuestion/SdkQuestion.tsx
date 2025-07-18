@@ -96,6 +96,7 @@ export const _SdkQuestion = ({
   targetDashboardId,
   backToDashboard,
   mode,
+  enableNavigationToNewCard,
 
   // SdkQuestionDefaultViewProps
   height,
@@ -124,6 +125,7 @@ export const _SdkQuestion = ({
     targetDashboardId={targetDashboardId}
     backToDashboard={backToDashboard}
     mode={mode}
+    enableNavigationToNewCard={enableNavigationToNewCard}
   >
     {children ?? (
       <SdkQuestionDefaultView

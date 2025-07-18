@@ -45,6 +45,7 @@ export const SdkQuestionProvider = ({
   targetDashboardId,
   backToDashboard,
   mode,
+  enableNavigationToNewCard,
 }: SdkQuestionProviderProps) => {
   const handleCreateQuestion = useCreateQuestion();
   const handleSaveQuestion = useSaveQuestion();
@@ -123,7 +124,7 @@ export const SdkQuestionProvider = ({
     queryQuestion,
     replaceQuestion,
     updateQuestion,
-    navigateToNewCard,
+    navigateToNewCard: enableNavigationToNewCard ? navigateToNewCard : null,
     plugins,
     question,
     originalQuestion,

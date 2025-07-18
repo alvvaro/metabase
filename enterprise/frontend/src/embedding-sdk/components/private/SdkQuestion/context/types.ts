@@ -92,6 +92,7 @@ export type SdkQuestionProviderProps = PropsWithChildren<
     Omit<LoadSdkQuestionParams, "questionId"> &
     SdkQuestionIdProps & {
       mode?: QueryClickActionsMode;
+      enableNavigationToNewCard?: boolean;
     }
 >;
 
