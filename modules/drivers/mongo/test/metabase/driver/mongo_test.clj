@@ -197,7 +197,6 @@
              {:schema nil, :name "reviews"}}
            (:tables (driver/describe-database :mongo (mt/db)))))))
 
-
 (tx/defdataset nested-bindata-coll
   (let [not-uuid  (Binary. (byte 0) (byte-array 1))
         some-uuid #uuid "11111111-1111-1111-1111-111111111111"
@@ -798,8 +797,8 @@
                (mt/rows
                 (mt/run-mbql-query coll
                   {:filter      [:and
-                            [:= $coll.json_field.key_1 "value_jf_a" "value_jf_b"]
-                            [:= $list_field "value_lf_a"]]
+                                 [:= $coll.json_field.key_1 "value_jf_a" "value_jf_b"]
+                                 [:= $list_field "value_lf_a"]]
                    :aggregation [[:count]]
                    :breakout    [$coll.metas.group_field]}))))))))
 
