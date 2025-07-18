@@ -31,7 +31,7 @@ export {
   type BreakoutDropdownProps,
   type ChartTypeDropdownProps,
   type ChartTypeSelectorProps,
-  type InteractiveQuestionDownloadWidgetProps,
+  type DownloadWidgetProps,
   type InteractiveQuestionDownloadWidgetDropdownProps,
   type InteractiveQuestionEditorProps,
   type InteractiveQuestionEditorButtonProps,
