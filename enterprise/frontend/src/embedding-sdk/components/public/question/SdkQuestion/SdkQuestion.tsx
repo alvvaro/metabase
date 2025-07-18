@@ -75,7 +75,7 @@ export type DrillThroughQuestionProps = Omit<
  * @expand
  * @category InteractiveQuestion
  */
-export type SdkQuestionProps = BaseSdkQuestionProps &
+export type SdkQuestionProps = SdkQuestionProviderProps &
   SdkQuestionDefaultViewProps;
 
 export const _SdkQuestion = ({

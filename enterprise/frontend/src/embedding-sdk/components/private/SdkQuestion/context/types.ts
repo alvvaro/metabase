@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from "react";
 
+import type { SdkQuestionIdProps } from "embedding-sdk/components/public/question/SdkQuestion/types";
 import type { LoadQuestionHookResult } from "embedding-sdk/hooks/private/use-load-question";
 import type { SdkCollectionId } from "embedding-sdk/types/collection";
 import type { MetabasePluginsConfig } from "embedding-sdk/types/plugins";
@@ -88,8 +89,8 @@ export type QuestionMockLocationParameters = {
 
 export type SdkQuestionProviderProps = PropsWithChildren<
   SdkQuestionConfig &
-    Omit<LoadSdkQuestionParams, "questionId"> & {
-      questionId: SdkQuestionId | null;
+    Omit<LoadSdkQuestionParams, "questionId"> &
+    SdkQuestionIdProps & {
       mode?: QueryClickActionsMode;
     }
 >;

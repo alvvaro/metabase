@@ -25,7 +25,10 @@ import { EmbeddingSdkMode } from "metabase/visualizations/click-actions/modes/Em
 
 import { SdkQuestion, type SdkQuestionProps } from "../SdkQuestion";
 
-type InteractiveQuestionProps = SdkQuestionProps;
+type InteractiveQuestionProps = SdkQuestionProps & {
+  // TODO: Let's just use plugins in SdkQuestionProps
+  plugins: SdkQuestionProps["componentPlugins"];
+};
 
 const _InteractiveQuestion = ({
   questionId,

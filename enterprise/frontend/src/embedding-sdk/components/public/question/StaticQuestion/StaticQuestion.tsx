@@ -1,26 +1,29 @@
-import type { FlexibleSizeProps } from "embedding-sdk/components/private/FlexibleSizeComponent";
-import { withPublicComponentWrapper } from "embedding-sdk/components/private/PublicComponentWrapper";
-import {
-  SdkQuestionProvider,
-  type SdkQuestionProviderProps,
-} from "embedding-sdk/components/private/SdkQuestion/context";
+import { StaticQuestionSdkMode } from "embedding-sdk/components/public/question/StaticQuestion/mode";
 import { Group, Stack } from "metabase/ui";
 
-import { SdkQuestion } from "../SdkQuestion";
-import type { SdkQuestionIdProps } from "../SdkQuestion/types";
+import { SdkQuestion, type SdkQuestionProps } from "../SdkQuestion";
 
 /**
  * @interface
  * @expand
  * @category StaticQuestion
  */
-export type StaticQuestionProps = SdkQuestionIdProps & {
+export type StaticQuestionProps = Pick<
+  SdkQuestionProps,
+  | "questionId"
+  | "height"
+  | "width"
+  | "className"
+  | "style"
+  | "initialSqlParameters"
+  | "withDownloads"
+  | "children"
+> & {
   withChartTypeSelector?: boolean;
-} & Pick<SdkQuestionProviderProps, "initialSqlParameters" | "withDownloads"> &
-  FlexibleSizeProps;
+};
 
 const StaticQuestionInner = ({
-  questionId: initialQuestionId,
+  questionId,
   withChartTypeSelector,
   height,
   width,
@@ -28,28 +31,31 @@ const StaticQuestionInner = ({
   style,
   initialSqlParameters,
   withDownloads,
+  children,
 }: StaticQuestionProps): JSX.Element | null => (
-  <SdkQuestionProvider
-    questionId={initialQuestionId}
-    variant="static"
+  <SdkQuestion
+    questionId={questionId}
     initialSqlParameters={initialSqlParameters}
     withDownloads={withDownloads}
+    mode={StaticQuestionSdkMode}
   >
-    <Stack gap="sm" w="100%" h="100%">
-      {(withChartTypeSelector || withDownloads) && (
-        <Group justify="space-between">
-          {withChartTypeSelector && <SdkQuestion.ChartTypeDropdown />}
-          {withDownloads && <SdkQuestion.DownloadWidgetDropdown />}
-        </Group>
-      )}
-      <SdkQuestion.QuestionVisualization
-        height={height}
-        width={width}
-        className={className}
-        style={style}
-      />
-    </Stack>
-  </SdkQuestionProvider>
+    {children ?? (
+      <Stack gap="sm" w="100%" h="100%">
+        {(withChartTypeSelector || withDownloads) && (
+          <Group justify="space-between">
+            {withChartTypeSelector && <SdkQuestion.ChartTypeDropdown />}
+            {withDownloads && <SdkQuestion.DownloadWidgetDropdown />}
+          </Group>
+        )}
+        <SdkQuestion.QuestionVisualization
+          height={height}
+          width={width}
+          className={className}
+          style={style}
+        />
+      </Stack>
+    )}
+  </SdkQuestion>
 );
 
 /**
@@ -58,4 +64,23 @@ const StaticQuestionInner = ({
  * @function
  * @category StaticQuestion
  */
-export const StaticQuestion = withPublicComponentWrapper(StaticQuestionInner);
+export const StaticQuestion =
+  StaticQuestionInner as typeof StaticQuestionInner & {
+    Title: typeof SdkQuestion.Title;
+    QuestionVisualization: typeof SdkQuestion.QuestionVisualization;
+    ChartTypeSelector: typeof SdkQuestion.ChartTypeSelector;
+    ChartTypeDropdown: typeof SdkQuestion.ChartTypeDropdown;
+    QuestionSettings: typeof SdkQuestion.QuestionSettings;
+    QuestionSettingsDropdown: typeof SdkQuestion.QuestionSettingsDropdown;
+    DownloadWidget: typeof SdkQuestion.DownloadWidget;
+    DownloadWidgetDropdown: typeof SdkQuestion.DownloadWidgetDropdown;
+  };
+
+StaticQuestion.Title = SdkQuestion.Title;
+StaticQuestion.QuestionSettings = SdkQuestion.QuestionSettings;
+StaticQuestion.ChartTypeSelector = SdkQuestion.ChartTypeSelector;
+StaticQuestion.ChartTypeDropdown = SdkQuestion.ChartTypeDropdown;
+StaticQuestion.QuestionSettings = SdkQuestion.QuestionSettings;
+StaticQuestion.QuestionSettingsDropdown = SdkQuestion.QuestionSettingsDropdown;
+StaticQuestion.DownloadWidget = SdkQuestion.DownloadWidget;
+StaticQuestion.DownloadWidgetDropdown = SdkQuestion.DownloadWidgetDropdown;
