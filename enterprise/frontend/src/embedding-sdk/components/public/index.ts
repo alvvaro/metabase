@@ -38,7 +38,7 @@ export {
   type FilterProps,
   type FilterDropdownProps,
   type QuestionSettingsProps,
-  type InteractiveQuestionQuestionSettingsDropdownProps,
+  type QuestionSettingsDropdownProps,
   type InteractiveQuestionQuestionVisualizationProps,
   type InteractiveQuestionResetButtonProps,
   type InteractiveQuestionSaveButtonProps,
