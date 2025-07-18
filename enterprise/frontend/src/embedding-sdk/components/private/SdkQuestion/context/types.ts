@@ -9,7 +9,7 @@ import type {
   SdkQuestionId,
   SqlParameterValues,
 } from "embedding-sdk/types/question";
-import type { Mode } from "metabase/visualizations/click-actions/Mode";
+import type { QueryClickActionsMode } from "metabase/visualizations/types";
 import type Question from "metabase-lib/v1/Question";
 import type { DashboardId } from "metabase-types/api";
 import type { EmbeddingEntityType } from "metabase-types/store/embedding-data-picker";
@@ -90,7 +90,7 @@ export type SdkQuestionProviderProps = PropsWithChildren<
   SdkQuestionConfig &
     Omit<LoadSdkQuestionParams, "questionId"> & {
       questionId: SdkQuestionId | null;
-      variant?: "static" | "interactive";
+      mode?: QueryClickActionsMode;
     }
 >;
 
@@ -107,9 +107,8 @@ export type SdkQuestionContextType = Omit<
     | "withDownloads"
     | "backToDashboard"
   > &
-  Pick<SdkQuestionProviderProps, "variant"> & {
+  Pick<SdkQuestionProviderProps, "mode"> & {
     plugins: SdkQuestionConfig["componentPlugins"] | null;
-    mode: Mode | null | undefined;
     originalId: SdkQuestionId | null;
     resetQuestion: () => void;
     onReset: () => void;

@@ -1,20 +1,16 @@
 import { createContext, useContext, useEffect, useMemo } from "react";
 
-import { StaticQuestionSdkMode } from "embedding-sdk/components/public/question/StaticQuestion/mode";
 import { useLoadQuestion } from "embedding-sdk/hooks/private/use-load-question";
 import { transformSdkQuestion } from "embedding-sdk/lib/transform-question";
 import { useSdkDispatch, useSdkSelector } from "embedding-sdk/store";
 import { getPlugins } from "embedding-sdk/store/selectors";
 import type { MetabasePluginsConfig } from "embedding-sdk/types/plugins";
-import type { MetabasePluginsConfig as InternalMetabasePluginsConfig } from "metabase/embedding-sdk/types/plugins";
 import {
   type OnCreateOptions,
   useCreateQuestion,
 } from "metabase/query_builder/containers/use-create-question";
 import { useSaveQuestion } from "metabase/query_builder/containers/use-save-question";
 import { setEntityTypes } from "metabase/redux/embedding-data-picker";
-import { getEmbeddingMode } from "metabase/visualizations/click-actions/lib/modes";
-import { EmbeddingSdkMode } from "metabase/visualizations/click-actions/modes/EmbeddingSdkMode";
 import type Question from "metabase-lib/v1/Question";
 
 import type { SdkQuestionContextType, SdkQuestionProviderProps } from "./types";
@@ -46,7 +42,6 @@ export const SdkQuestionProvider = ({
   targetCollection,
   initialSqlParameters,
   withDownloads,
-  variant,
   targetDashboardId,
   backToDashboard,
   mode,
@@ -118,18 +113,6 @@ export const SdkQuestionProvider = ({
     return { ...globalPlugins, ...componentPlugins };
   }, [globalPlugins, componentPlugins]);
 
-  const mode = useMemo(() => {
-    return (
-      question &&
-      getEmbeddingMode({
-        question,
-        queryMode:
-          variant === "static" ? StaticQuestionSdkMode : EmbeddingSdkMode,
-        plugins: plugins as InternalMetabasePluginsConfig,
-      })
-    );
-  }, [question, variant, plugins]);
-
   const questionContext: SdkQuestionContextType = {
     originalId: questionId,
     isQuestionLoading,
@@ -151,7 +134,6 @@ export const SdkQuestionProvider = ({
     isSaveEnabled,
     targetCollection,
     withDownloads,
-    variant,
     onRun,
     backToDashboard,
   };

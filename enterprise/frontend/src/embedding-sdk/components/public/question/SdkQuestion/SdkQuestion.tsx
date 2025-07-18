@@ -80,35 +80,50 @@ export type SdkQuestionProps = BaseSdkQuestionProps &
 
 export const _SdkQuestion = ({
   questionId,
-  withResetButton = true,
-  title,
-  plugins,
+  options,
+  deserializedCard,
+  componentPlugins,
+  onNavigateBack,
+  children,
+  onBeforeSave,
+  onSave,
+  onRun,
+  isSaveEnabled = true,
+  entityTypes,
+  targetCollection,
+  initialSqlParameters,
+  withDownloads,
+  targetDashboardId,
+  backToDashboard,
+  mode,
+
+  // SdkQuestionDefaultViewProps
   height,
   width,
   className,
   style,
-  children = null,
-  onBeforeSave,
-  onSave,
-  entityTypes,
-  isSaveEnabled,
-  targetCollection,
-  withChartTypeSelector = true,
-  withDownloads = false,
-  initialSqlParameters,
-  onRun,
-}: SdkQuestionProps): JSX.Element | null => (
+  title,
+  withResetButton,
+  withChartTypeSelector,
+}: SdkQuestionProviderProps &
+  SdkQuestionDefaultViewProps): JSX.Element | null => (
   <SdkQuestionProvider
     questionId={questionId}
-    componentPlugins={plugins}
+    options={options}
+    deserializedCard={deserializedCard}
+    componentPlugins={componentPlugins}
+    onNavigateBack={onNavigateBack}
     onBeforeSave={onBeforeSave}
     onSave={onSave}
-    entityTypes={entityTypes}
+    onRun={onRun}
     isSaveEnabled={isSaveEnabled}
+    entityTypes={entityTypes}
     targetCollection={targetCollection}
     initialSqlParameters={initialSqlParameters}
     withDownloads={withDownloads}
-    onRun={onRun}
+    targetDashboardId={targetDashboardId}
+    backToDashboard={backToDashboard}
+    mode={mode}
   >
     {children ?? (
       <SdkQuestionDefaultView
