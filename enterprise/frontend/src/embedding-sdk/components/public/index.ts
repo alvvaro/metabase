@@ -26,7 +26,7 @@ export type {
 export {
   InteractiveQuestion,
   type BaseSdkQuestionProps,
-  type InteractiveQuestionProps,
+  type SdkQuestionProps,
   type InteractiveQuestionBackButtonProps,
   type InteractiveQuestionBreakoutDropdownProps,
   type InteractiveQuestionChartTypeDropdownProps,

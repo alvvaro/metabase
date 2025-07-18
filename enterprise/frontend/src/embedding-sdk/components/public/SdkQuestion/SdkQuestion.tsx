@@ -30,7 +30,7 @@ import {
 } from "embedding-sdk/components/private/SdkQuestion/context";
 import {
   InteractiveQuestionDefaultView,
-  type InteractiveQuestionDefaultViewProps,
+  type SdkQuestionDefaultViewProps,
 } from "embedding-sdk/components/private/SdkQuestionDefaultView";
 
 import type { SdkQuestionIdProps } from "./types";
@@ -68,15 +68,15 @@ export type DrillThroughQuestionProps = Omit<
   BaseSdkQuestionProps,
   "questionId"
 > &
-  InteractiveQuestionDefaultViewProps;
+  SdkQuestionDefaultViewProps;
 
 /**
  * @interface
  * @expand
  * @category InteractiveQuestion
  */
-export type InteractiveQuestionProps = BaseSdkQuestionProps &
-  InteractiveQuestionDefaultViewProps;
+export type SdkQuestionProps = BaseSdkQuestionProps &
+  SdkQuestionDefaultViewProps;
 
 export const _InteractiveQuestion = ({
   questionId,
@@ -97,7 +97,7 @@ export const _InteractiveQuestion = ({
   withDownloads = false,
   initialSqlParameters,
   onRun,
-}: InteractiveQuestionProps): JSX.Element | null => (
+}: SdkQuestionProps): JSX.Element | null => (
   <SdkQuestionProvider
     questionId={questionId}
     componentPlugins={plugins}

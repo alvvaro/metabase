@@ -53,7 +53,7 @@ import type { DashboardId } from "metabase-types/api";
 
 import type {
   DrillThroughQuestionProps,
-  InteractiveQuestionProps,
+  SdkQuestionProps,
 } from "../SdkQuestion";
 
 import {
@@ -107,7 +107,7 @@ export type EditableDashboardOwnProps = {
   /**
    * Additional props to pass to the query builder rendered by `InteractiveQuestion` when creating a new dashboard question.
    */
-  dataPickerProps?: Pick<InteractiveQuestionProps, "entityTypes">;
+  dataPickerProps?: Pick<SdkQuestionProps, "entityTypes">;
 };
 
 export type SdkDashboardInnerProps = SdkDashboardProps &
