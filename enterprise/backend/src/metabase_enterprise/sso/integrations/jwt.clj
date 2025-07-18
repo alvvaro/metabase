@@ -17,6 +17,7 @@
    [metabase.tenants.core :as tenants]
    [metabase.util :as u]
    [metabase.util.i18n :refer [tru trs]]
+   [metabase.util.log :as log]
    [metabase.util.malli :as mu]
    [metabase.util.malli.schema :as ms]
    [ring.util.response :as response]
@@ -81,15 +82,25 @@
   "Registered claims in the JWT standard which we should not interpret as login attributes"
   [:iss :iat :sub :aud :exp :nbf :jti])
 
+(defn- filter-non-string-attributes
+  [jwt-data]
+  (->> jwt-data
+       (filter (fn [[key value]]
+                 (if (string? value)
+                   value
+                   (log/warnf "Dropping JWT claim '%s' with non-string value: %s" (name key) value))))
+       (into {})))
+
 (defn- jwt-data->login-attributes [jwt-data]
   (let [use-tenants? (setting/get :use-tenants)
         to-dissoc (remove nil? (concat
                                 [(jwt-attribute-email)
                                  (jwt-attribute-firstname)
                                  (jwt-attribute-lastname)
+                                 (jwt-attribute-groups)
                                  (when use-tenants? (jwt-attribute-tenant))]
                                 registered-claims))]
-    (apply dissoc jwt-data to-dissoc)))
+    (filter-non-string-attributes (apply dissoc jwt-data to-dissoc))))
 
 ;; JWTs use seconds since Epoch, not milliseconds since Epoch for the `iat` and `max_age` time. 3 minutes is the time
 ;; used by Zendesk for their JWT SSO, so it seemed like a good place for us to start
