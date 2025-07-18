@@ -1,4 +1,4 @@
-import { SdkQuestion } from "embedding-sdk";
+import { SdkQuestion } from "embedding-sdk/components/public/question";
 import { CommonSdkStoryWrapper } from "embedding-sdk/test/CommonSdkStoryWrapper";
 import { Box } from "metabase/ui";
 

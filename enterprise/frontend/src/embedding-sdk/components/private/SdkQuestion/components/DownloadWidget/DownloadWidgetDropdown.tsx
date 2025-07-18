@@ -1,4 +1,4 @@
-import { SdkQuestion } from "embedding-sdk";
+import { SdkQuestion } from "embedding-sdk/components/public/question";
 import { Center, Icon, Popover, type PopoverProps } from "metabase/ui";
 
 import { useSdkQuestionContext } from "../../context";
