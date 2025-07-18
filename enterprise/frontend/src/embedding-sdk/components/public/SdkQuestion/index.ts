@@ -9,7 +9,7 @@ export {
   type EditorButtonProps,
   type FilterProps,
   type FilterDropdownProps,
-  type QuestionSettingsProps as InteractiveQuestionQuestionSettingsProps,
+  type QuestionSettingsProps,
   type QuestionSettingsDropdownProps as InteractiveQuestionQuestionSettingsDropdownProps,
   type QuestionVisualizationProps as InteractiveQuestionQuestionVisualizationProps,
   type ResetButtonProps as InteractiveQuestionResetButtonProps,
