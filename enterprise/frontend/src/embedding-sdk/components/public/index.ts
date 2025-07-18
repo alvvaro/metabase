@@ -36,7 +36,7 @@ export {
   type EditorProps,
   type EditorButtonProps,
   type FilterProps,
-  type InteractiveQuestionFilterDropdownProps,
+  type FilterDropdownProps,
   type InteractiveQuestionQuestionSettingsProps,
   type InteractiveQuestionQuestionSettingsDropdownProps,
   type InteractiveQuestionQuestionVisualizationProps,
