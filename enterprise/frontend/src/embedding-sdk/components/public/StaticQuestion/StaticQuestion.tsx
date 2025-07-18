@@ -2,26 +2,26 @@ import {
   FlexibleSizeComponent,
   type FlexibleSizeProps,
 } from "embedding-sdk/components/private/FlexibleSizeComponent";
-import {
-  InteractiveQuestionProvider,
-  type InteractiveQuestionProviderProps,
-} from "embedding-sdk/components/private/InteractiveQuestion/context";
-import type { InteractiveQuestionDefaultViewProps } from "embedding-sdk/components/private/InteractiveQuestionDefaultView";
-import { DefaultViewTitle } from "embedding-sdk/components/private/InteractiveQuestionDefaultView/DefaultViewTitle";
 import { withPublicComponentWrapper } from "embedding-sdk/components/private/PublicComponentWrapper";
+import {
+  SdkQuestionProvider,
+  type SdkQuestionProviderProps,
+} from "embedding-sdk/components/private/SdkQuestion/context";
+import type { InteractiveQuestionDefaultViewProps } from "embedding-sdk/components/private/SdkQuestionDefaultView";
+import { DefaultViewTitle } from "embedding-sdk/components/private/SdkQuestionDefaultView/DefaultViewTitle";
 import { Group, Stack } from "metabase/ui";
 
-import { InteractiveQuestion } from "../InteractiveQuestion";
-import type { InteractiveQuestionQuestionIdProps } from "../InteractiveQuestion/types";
+import { InteractiveQuestion } from "../SdkQuestion";
+import type { SdkQuestionIdProps } from "../SdkQuestion/types";
 
 /**
  * @interface
  * @expand
  * @category StaticQuestion
  */
-export type StaticQuestionProps = InteractiveQuestionQuestionIdProps & {
+export type StaticQuestionProps = SdkQuestionIdProps & {
   withChartTypeSelector?: boolean;
-} & Pick<InteractiveQuestionProviderProps, "initialSqlParameters"> &
+} & Pick<SdkQuestionProviderProps, "initialSqlParameters" | "withDownloads"> &
   Pick<InteractiveQuestionDefaultViewProps, "title"> &
   FlexibleSizeProps;
 
@@ -33,14 +33,16 @@ const StaticQuestionInner = ({
   className,
   style,
   initialSqlParameters,
+  withDownloads,
 
   // Hidden by default for backwards-compatibility.
   title = false,
 }: StaticQuestionProps): JSX.Element | null => (
-  <InteractiveQuestionProvider
+  <SdkQuestionProvider
     questionId={initialQuestionId}
     variant="static"
     initialSqlParameters={initialSqlParameters}
+    withDownloads={withDownloads}
   >
     <FlexibleSizeComponent
       width={width}
@@ -51,9 +53,10 @@ const StaticQuestionInner = ({
       <Stack gap="sm" w="100%" h="100%">
         {title && <DefaultViewTitle title={title} />}
 
-        {withChartTypeSelector && (
+        {(withChartTypeSelector || withDownloads) && (
           <Group justify="space-between">
-            <InteractiveQuestion.ChartTypeDropdown />
+            {withChartTypeSelector && <InteractiveQuestion.ChartTypeDropdown />}
+            {withDownloads && <InteractiveQuestion.DownloadWidgetDropdown />}
           </Group>
         )}
 
@@ -65,7 +68,7 @@ const StaticQuestionInner = ({
         />
       </Stack>
     </FlexibleSizeComponent>
-  </InteractiveQuestionProvider>
+  </SdkQuestionProvider>
 );
 
 /**

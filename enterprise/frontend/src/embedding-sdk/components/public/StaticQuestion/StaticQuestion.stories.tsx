@@ -23,6 +23,14 @@ export default {
   decorators: [CommonSdkStoryWrapper],
   argTypes: {
     questionId: questionIdArgType,
+    withDownloads: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    withChartTypeSelector: {
+      control: "boolean",
+      defaultValue: false,
+    },
   },
 };
 
@@ -41,6 +49,8 @@ export const Default = {
     questionId: QUESTION_ID,
     isSaveEnabled: true,
     title: false,
+    withDownloads: false,
+    withChartTypeSelector: false,
   },
 };
 
@@ -50,5 +60,7 @@ export const WithCustomTitle = {
   args: {
     questionId: QUESTION_ID,
     title: "Acme Inc. Sales Report",
+    withDownloads: false,
+    withChartTypeSelector: false,
   },
 };
