@@ -24,7 +24,8 @@ export type {
   EditableDashboardProps,
 } from "./dashboard";
 export {
-  SdkQuestion,
+  InteractiveQuestion,
+  type InteractiveQuestionProps,
   type BaseSdkQuestionProps,
   type SdkQuestionProps,
   type BackButtonProps,
