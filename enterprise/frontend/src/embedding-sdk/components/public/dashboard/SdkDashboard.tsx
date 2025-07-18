@@ -18,7 +18,7 @@ import {
 } from "embedding-sdk/components/private/PublicComponentWrapper";
 import { InteractiveAdHocQuestion } from "embedding-sdk/components/private/SdkAdHocQuestion";
 import { SdkQuestionProvider } from "embedding-sdk/components/private/SdkQuestion/context";
-import { InteractiveQuestionDefaultView } from "embedding-sdk/components/private/SdkQuestionDefaultView";
+import { SdkQuestionDefaultView } from "embedding-sdk/components/private/SdkQuestionDefaultView";
 import {
   type SdkDashboardDisplayProps,
   useSdkDashboardParams,
@@ -407,7 +407,7 @@ function DashboardQueryBuilder({
       backToDashboard={dashboard}
       entityTypes={dataPickerProps?.entityTypes}
     >
-      <InteractiveQuestionDefaultView
+      <SdkQuestionDefaultView
         withResetButton
         withChartTypeSelector
         // The default value is 600px and it cuts off the "Visualize" button.

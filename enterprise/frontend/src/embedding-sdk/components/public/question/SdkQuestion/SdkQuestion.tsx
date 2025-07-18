@@ -29,7 +29,7 @@ import {
   type SdkQuestionProviderProps,
 } from "embedding-sdk/components/private/SdkQuestion/context";
 import {
-  InteractiveQuestionDefaultView,
+  SdkQuestionDefaultView,
   type SdkQuestionDefaultViewProps,
 } from "embedding-sdk/components/private/SdkQuestionDefaultView";
 
@@ -111,7 +111,7 @@ export const _SdkQuestion = ({
     onRun={onRun}
   >
     {children ?? (
-      <InteractiveQuestionDefaultView
+      <SdkQuestionDefaultView
         height={height}
         width={width}
         className={className}

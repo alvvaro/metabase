@@ -9,7 +9,7 @@ import {
   SdkQuestionProvider,
 } from "../SdkQuestion/context";
 import {
-  InteractiveQuestionDefaultView,
+  SdkQuestionDefaultView,
   type SdkQuestionDefaultViewProps,
 } from "../SdkQuestionDefaultView";
 
@@ -71,7 +71,7 @@ export const InteractiveAdHocQuestion = ({
       onNavigateBack={onNavigateBack}
     >
       {children ?? (
-        <InteractiveQuestionDefaultView
+        <SdkQuestionDefaultView
           height={height}
           width={width}
           className={className}

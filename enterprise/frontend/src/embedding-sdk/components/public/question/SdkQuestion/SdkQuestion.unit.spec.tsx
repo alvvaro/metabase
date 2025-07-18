@@ -20,7 +20,7 @@ import {
   within,
 } from "__support__/ui";
 import {
-  InteractiveQuestionDefaultView,
+  SdkQuestionDefaultView,
   type SdkQuestionDefaultViewProps,
 } from "embedding-sdk/components/private/SdkQuestionDefaultView";
 import { renderWithSDKProviders } from "embedding-sdk/test/__support__/ui";
@@ -82,7 +82,7 @@ function InteractiveQuestionCustomLayout({
   return (
     <div>
       <button onClick={resetQuestion}>Run Query</button>
-      <InteractiveQuestionDefaultView title={title} />
+      <SdkQuestionDefaultView title={title} />
     </div>
   );
 }

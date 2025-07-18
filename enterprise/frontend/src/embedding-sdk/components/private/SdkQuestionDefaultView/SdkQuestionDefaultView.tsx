@@ -51,7 +51,7 @@ export interface SdkQuestionDefaultViewProps extends FlexibleSizeProps {
   withChartTypeSelector?: boolean;
 }
 
-export const InteractiveQuestionDefaultView = ({
+export const SdkQuestionDefaultView = ({
   height,
   width,
   className,
