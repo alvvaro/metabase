@@ -43,7 +43,7 @@ import { createMockEntityId } from "metabase-types/api/mocks/entity-id";
 
 import { useSdkQuestionContext } from "../../private/SdkQuestion/context";
 
-import { type BaseInteractiveQuestionProps, SdkQuestion } from "./SdkQuestion";
+import { type BaseSdkQuestionProps, SdkQuestion } from "./SdkQuestion";
 const TEST_PARAM = createMockParameter({
   type: "number/=",
   slug: "product_id",
@@ -102,7 +102,7 @@ const setup = ({
   initialSqlParameters,
   cardId = TEST_CARD_ID,
 }: Partial<
-  Pick<BaseInteractiveQuestionProps, "initialSqlParameters"> &
+  Pick<BaseSdkQuestionProps, "initialSqlParameters"> &
     Pick<
       InteractiveQuestionDefaultViewProps,
       "withChartTypeSelector" | "title"

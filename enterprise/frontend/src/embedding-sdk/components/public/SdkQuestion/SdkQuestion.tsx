@@ -39,7 +39,7 @@ import type { SdkQuestionIdProps } from "./types";
  * @interface
  * @expand
  */
-export type BaseInteractiveQuestionProps = SdkQuestionIdProps & {
+export type BaseSdkQuestionProps = SdkQuestionIdProps & {
   /**
    * The children of the MetabaseProvider component.s
    */
@@ -65,7 +65,7 @@ export type BaseInteractiveQuestionProps = SdkQuestionIdProps & {
  * @category InteractiveQuestion
  */
 export type DrillThroughQuestionProps = Omit<
-  BaseInteractiveQuestionProps,
+  BaseSdkQuestionProps,
   "questionId"
 > &
   InteractiveQuestionDefaultViewProps;
@@ -75,7 +75,7 @@ export type DrillThroughQuestionProps = Omit<
  * @expand
  * @category InteractiveQuestion
  */
-export type InteractiveQuestionProps = BaseInteractiveQuestionProps &
+export type InteractiveQuestionProps = BaseSdkQuestionProps &
   InteractiveQuestionDefaultViewProps;
 
 export const _InteractiveQuestion = ({

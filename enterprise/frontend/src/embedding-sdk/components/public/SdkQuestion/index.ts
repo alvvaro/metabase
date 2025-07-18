@@ -21,7 +21,7 @@ export {
 
 export {
   SdkQuestion as InteractiveQuestion,
-  type BaseInteractiveQuestionProps,
+  type BaseSdkQuestionProps,
   type InteractiveQuestionProps,
   type DrillThroughQuestionProps,
 } from "./SdkQuestion";
