@@ -34,7 +34,7 @@ import { useSdkQuestionContext } from "../SdkQuestion/context";
 import { DefaultViewTitle } from "./DefaultViewTitle";
 import InteractiveQuestionS from "./SdkQuestionDefaultView.module.css";
 
-export interface InteractiveQuestionDefaultViewProps extends FlexibleSizeProps {
+export interface SdkQuestionDefaultViewProps extends FlexibleSizeProps {
   /**
    * Determines whether the question title is displayed, and allows a custom title to be displayed instead of the default question title. Shown by default. Only applicable to interactive questions when using the default layout.
    */
@@ -59,7 +59,7 @@ export const InteractiveQuestionDefaultView = ({
   title,
   withResetButton,
   withChartTypeSelector,
-}: InteractiveQuestionDefaultViewProps): ReactElement => {
+}: SdkQuestionDefaultViewProps): ReactElement => {
   const { isLocaleLoading } = useLocale();
   const {
     originalId,

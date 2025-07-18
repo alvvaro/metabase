@@ -21,7 +21,7 @@ import {
 } from "__support__/ui";
 import {
   InteractiveQuestionDefaultView,
-  type InteractiveQuestionDefaultViewProps,
+  type SdkQuestionDefaultViewProps,
 } from "embedding-sdk/components/private/SdkQuestionDefaultView";
 import { renderWithSDKProviders } from "embedding-sdk/test/__support__/ui";
 import { createMockSdkConfig } from "embedding-sdk/test/mocks/config";
@@ -103,10 +103,7 @@ const setup = ({
   cardId = TEST_CARD_ID,
 }: Partial<
   Pick<BaseSdkQuestionProps, "initialSqlParameters"> &
-    Pick<
-      InteractiveQuestionDefaultViewProps,
-      "withChartTypeSelector" | "title"
-    > & {
+    Pick<SdkQuestionDefaultViewProps, "withChartTypeSelector" | "title"> & {
       isValidCard?: boolean;
       withCustomLayout?: boolean;
     } & { cardId: BaseEntityId | CardId }

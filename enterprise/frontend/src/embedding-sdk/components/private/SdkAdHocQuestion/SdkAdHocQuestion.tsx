@@ -10,7 +10,7 @@ import {
 } from "../SdkQuestion/context";
 import {
   InteractiveQuestionDefaultView,
-  type InteractiveQuestionDefaultViewProps,
+  type SdkQuestionDefaultViewProps,
 } from "../SdkQuestionDefaultView";
 
 interface InteractiveAdHocQuestionProps {
@@ -39,7 +39,7 @@ export const InteractiveAdHocQuestion = ({
   onNavigateBack,
 }: InteractiveAdHocQuestionProps &
   Omit<BaseSdkQuestionProps, "questionId"> &
-  InteractiveQuestionDefaultViewProps) => {
+  SdkQuestionDefaultViewProps) => {
   const { location, params } = useMemo(
     () => getQuestionParameters(questionPath),
     [questionPath],
