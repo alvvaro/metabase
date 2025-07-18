@@ -6,7 +6,7 @@ import {
   dashboardIds,
 } from "embedding-sdk/test/storybook-id-args";
 
-import type { SdkQuestionProps } from "../../SdkQuestion";
+import type { SdkQuestionProps } from "../../question";
 
 import {
   EditableDashboard,

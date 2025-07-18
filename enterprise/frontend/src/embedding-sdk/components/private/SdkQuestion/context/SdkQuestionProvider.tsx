@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo } from "react";
 
-import { StaticQuestionSdkMode } from "embedding-sdk/components/public/StaticQuestion/mode";
+import { StaticQuestionSdkMode } from "embedding-sdk/components/public/question/StaticQuestion/mode";
 import { useLoadQuestion } from "embedding-sdk/hooks/private/use-load-question";
 import { transformSdkQuestion } from "embedding-sdk/lib/transform-question";
 import { useSdkDispatch, useSdkSelector } from "embedding-sdk/store";
@@ -49,6 +49,7 @@ export const SdkQuestionProvider = ({
   variant,
   targetDashboardId,
   backToDashboard,
+  mode,
 }: SdkQuestionProviderProps) => {
   const handleCreateQuestion = useCreateQuestion();
   const handleSaveQuestion = useSaveQuestion();

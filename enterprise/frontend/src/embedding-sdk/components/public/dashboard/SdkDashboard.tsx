@@ -51,10 +51,7 @@ import { dismissAllUndo } from "metabase/redux/undo";
 import { getErrorPage } from "metabase/selectors/app";
 import type { DashboardId } from "metabase-types/api";
 
-import type {
-  DrillThroughQuestionProps,
-  SdkQuestionProps,
-} from "../SdkQuestion";
+import type { DrillThroughQuestionProps, SdkQuestionProps } from "../question";
 
 import {
   SdkDashboardStyledWrapper,

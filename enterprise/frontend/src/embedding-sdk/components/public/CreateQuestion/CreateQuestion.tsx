@@ -1,4 +1,4 @@
-import { type BaseSdkQuestionProps, SdkQuestion } from "../SdkQuestion";
+import { type BaseSdkQuestionProps, SdkQuestion } from "../question";
 
 /**
  * @interface

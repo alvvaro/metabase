@@ -46,12 +46,15 @@ export {
   type SummarizeDropdownProps,
   type TitleProps,
   type DrillThroughQuestionProps,
-} from "./SdkQuestion";
+} from "./question";
 export {
   MetabaseProvider,
   type MetabaseProviderProps,
 } from "./MetabaseProvider";
-export { StaticQuestion, type StaticQuestionProps } from "./StaticQuestion";
+export {
+  StaticQuestion,
+  type StaticQuestionProps,
+} from "./question/StaticQuestion";
 
 // These functions looks useless but it's a trick to have a way to type the config
 // while having code snippets the same across js and ts. This works because the
