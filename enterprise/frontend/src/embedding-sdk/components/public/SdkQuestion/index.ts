@@ -16,7 +16,7 @@ export {
   type SaveButtonProps,
   type SaveQuestionFormProps,
   type SummarizeDropdownProps,
-  type TitleProps as InteractiveQuestionTitleProps,
+  type TitleProps,
 } from "embedding-sdk/components/private/SdkQuestion/components";
 
 export {

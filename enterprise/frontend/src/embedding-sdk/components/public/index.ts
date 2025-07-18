@@ -44,7 +44,7 @@ export {
   type SaveButtonProps,
   type SaveQuestionFormProps,
   type SummarizeDropdownProps,
-  type InteractiveQuestionTitleProps,
+  type TitleProps,
   type DrillThroughQuestionProps,
 } from "./SdkQuestion";
 export {
