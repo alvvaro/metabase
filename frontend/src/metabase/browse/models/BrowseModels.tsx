@@ -171,7 +171,7 @@ export const BrowseModels = () => {
 
 function useModelFilterSettings() {
   const defaultModelFilters = useSelector(getDefaultModelFilters);
-  return useState(defaultModelFilters);
+  return useState<ModelFilterSettings>({ verified: defaultModelFilters });
 }
 
 function useHasVerifiedModels() {

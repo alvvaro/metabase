@@ -183,7 +183,7 @@ function MetricsEmptyState({
 
 function useMetricFilterSettings() {
   const defaultMetricFilters = useSelector(getDefaultMetricFilters);
-  return useState(defaultMetricFilters);
+  return useState<MetricFilterSettings>({ verified: defaultMetricFilters });
 }
 
 function useHasVerifiedMetrics() {

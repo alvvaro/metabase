@@ -24,14 +24,8 @@ import {
   type EntityId,
   type PermissionSubject,
 } from "metabase/admin/permissions/types";
-import type {
-  MetricFilterControlsProps,
-  MetricFilterSettings,
-} from "metabase/browse/metrics";
-import type {
-  ModelFilterControlsProps,
-  ModelFilterSettings,
-} from "metabase/browse/models";
+import type { MetricFilterControlsProps } from "metabase/browse/metrics";
+import type { ModelFilterControlsProps } from "metabase/browse/models";
 import type { LinkProps } from "metabase/common/components/Link";
 import type { DashCardMenuItem } from "metabase/dashboard/components/DashCard/DashCardMenu/dashcard-menu";
 import type { DataSourceSelectorProps } from "metabase/embedding-sdk/types/components/data-picker";
@@ -576,13 +570,9 @@ export const PLUGIN_CONTENT_VERIFICATION = {
   ) => 0,
 
   ModelFilterControls: (_props: ModelFilterControlsProps) => null,
-  getDefaultModelFilters: (_state: State): ModelFilterSettings => ({
-    verified: false,
-  }),
+  getDefaultModelFilters: (_state: State) => false,
 
-  getDefaultMetricFilters: (_state: State): MetricFilterSettings => ({
-    verified: false,
-  }),
+  getDefaultMetricFilters: (_state: State) => false,
   MetricFilterControls: (_props: MetricFilterControlsProps) => null,
 };
 

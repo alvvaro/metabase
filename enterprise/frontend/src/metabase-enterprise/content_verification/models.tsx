@@ -1,10 +1,7 @@
 import { useCallback } from "react";
 import { t } from "ttag";
 
-import type {
-  ModelFilterControlsProps,
-  ModelFilterSettings,
-} from "metabase/browse/models";
+import type { ModelFilterControlsProps } from "metabase/browse/models";
 import { useUserSetting } from "metabase/common/hooks";
 import { getSetting } from "metabase/selectors/settings";
 import type { State } from "metabase-types/store";
@@ -13,10 +10,8 @@ import { VerifiedToggle } from "./VerifiedFilter/VerifiedToggle";
 
 const USER_SETTING_KEY = "browse-filter-only-verified-models";
 
-export function getDefaultModelFilters(state: State): ModelFilterSettings {
-  return {
-    verified: getSetting(state, USER_SETTING_KEY) ?? false,
-  };
+export function getDefaultModelFilters(state: State): boolean {
+  return getSetting(state, USER_SETTING_KEY) ?? false;
 }
 
 /**
